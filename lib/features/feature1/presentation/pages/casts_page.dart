@@ -33,23 +33,16 @@ class CastsPage extends StatelessWidget {
               }
 
               return GridView.builder(
-                itemCount: state.shows.length,
+                itemCount: state.casts.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 ),
                 itemBuilder: (context, index) {
                   final cast = state.casts[index];
 
-                  return GestureDetector(
-                    onTap: () {
-                      context
-                          .read<ShowsBloc>()
-                          .add(ShowsEvent.showDetais(index));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ItemCard(cast: cast),
-                    ),
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ItemCard(cast: cast),
                   );
                 },
               );
@@ -78,6 +71,10 @@ class ItemCard extends StatelessWidget {
             cast.image,
             fit: BoxFit.cover,
             height: 200,
+            errorBuilder: (context, error, stackTrace) => Container(
+              height: 200,
+              color: Colors.grey,
+            ),
           ),
           const SizedBox(height: 5),
           Text(

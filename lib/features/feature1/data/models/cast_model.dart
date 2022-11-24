@@ -12,12 +12,12 @@ class CastModel extends CastEnitity {
 
   factory CastModel.fromMap(Map<String, dynamic> map) {
     return CastModel(
-      id: map ['person'] ['id'] as int,
-      name: map['person']['name'] as String,
-      country: map['person']['country']['name'] as String,
-      birthday: map['birthday'] as String,
-      gender: map['gender'] as String,
-      image: map['image']['medium'] as String,
+      id: map ['person']['id'] as int,
+      name: map['person']['name'] ?? "",
+      country: map['person']?['country']['name'] ?? "",
+      birthday: map['birthday'] ?? "",
+      gender: map['gender'] ?? "",
+      image: map['person']['image']?['medium'] ?? "",
     );
   }
 

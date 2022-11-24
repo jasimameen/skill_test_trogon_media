@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:skill_test_trogon_media/core/utils/navigation.dart';
@@ -49,30 +51,38 @@ class ShowsBloc extends Bloc<ShowsEvent, ShowsState> {
     });
 
     // fetch casts
-    on<_ShowCasts>((event, emit) async {
-      // send loading state
-      emit(state.copyWith(isLoading: true));
+    on<_ShowCasts>(
+      (event, emit) async {
+        // send loading state
+        emit(state.copyWith(isLoading: true));
 
-
-      Navigation.pushNamed(CastsPage.routeName);
-
-      // get casts
-      final castsOption = await repository.getCasts(state.currentShow!.id);
-      castsOption.fold((failure) {
-        // send error state
-        emit(state.copyWith(
-          isLoading: false,
-          isError: true,
-        ));
-      }, (casts) {
-        // send success state
-        emit(
-          state.copyWith(
-            isLoading: false,
-            casts: casts,
-          ),
+        // get casts
+        final castsOption = await repository.getCasts(state.currentShow!.id);
+        castsOption.fold(
+          (failure) {
+            // send error state
+            emit(
+              state.copyWith(
+                isLoading: false,
+                isError: true,
+              ),
+            );
+          },
+          (casts) {
+            log(casts.first.image);
+            // send success state
+            emit(
+              state.copyWith(
+                isLoading: false,
+                casts: casts,
+              ),
+            );
+          },
         );
-      });
-    });
+
+
+        Navigation.pushNamed(CastsPage.routeName);
+      },
+    );
   }
 }

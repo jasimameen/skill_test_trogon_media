@@ -43,19 +43,19 @@ class ShowModel extends ShowEntity {
   factory ShowModel.fromMap(Map<String, dynamic> map) {
     return ShowModel(
       id: map['id'] as int,
-      name: map['name'] as String,
-      language: map['language'] as String,
-      status: map['status'] as String,
-      premiered: map['premiered'] as String,
-      ended: map['ended'] as String,
-      officialSite: map['officialSite'] as String,
-      rating: (map['rating']['average'] as double).toString(),
-      image: map['image']['medium'] as String,
-      summary: map['summary'] as String,
+      name: map['name'] ?? "",
+      language: map['language'] ?? "",
+      status: map['status'] ?? "",
+      premiered: map['premiered'] ?? "",
+      ended: map['ended'] ?? "",
+      officialSite: map['officialSite'] ?? "",
+      rating: (map['rating']['average'] ?? 0).toString(),
+      image: map['image']['medium'] ?? "",
+      summary: map['summary'] ?? "",
     );
   }
 
- @override
+  @override
   bool operator ==(covariant ShowModel other) {
     if (identical(this, other)) return true;
 
