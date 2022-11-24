@@ -12,7 +12,7 @@ class CastsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Casts'),
+        title: const Text('All Casts Casts'),
       ),
       body: Center(
         child: Padding(
